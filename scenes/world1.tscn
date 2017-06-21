@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://scenes/tilset_grass.tres" type="TileSet" id=1]
+[ext_resource path="res://scripts/player_test_movement.gd" type="Script" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -131074, 14, -131073, 5, -196608, 5, -196607, 5, -196606, 5, -196605, 13, -65539, 14, -65538, 16, -131069, 15, -131068, 13, -3, 3, -65532, 15, -65531, 5, -65530, 5, -65529, 5, -65528, 13, 65533, 3, 8, 15, 9, 13, 131069, 3, 65545, 15, 65546, 5, 65547, 5, 65548, 20, 65549, 21, 65550, 5, 65551, 5, 65552, 5, 65553, 5, 65554, 5, 65555, 13, 196605, 3, 196606, 19, 196607, 18, 131072, 18, 131073, 17, 131084, 15, 131085, 16, 131091, 15, 131092, 5, 131093, 5, 131094, 5, 131095, 5, 131096, 5, 131097, 13, 262141, 25, 262142, 1, 262143, 1, 196608, 1, 196609, 1, 196610, 10, 196633, 15, 196634, 5, 196635, 5, 196636, 5, 196637, 5, 196638, 5, 196639, 5, 196640, 5, 196641, 5, 196642, 5, 196643, 5, 196644, 5, 196645, 5, 196646, 5, 196647, 5, 196648, 5, 196649, 5, 196650, 5, 196651, 5, 196652, 5, 196667, 9, 196668, 1, 262146, 25, 262147, 10, 262148, 19, 262149, 17, 262202, 9, 327683, 25, 327684, 1, 327685, 1, 327686, 10, 327692, 19, 327693, 17, 327737, 9, 393222, 25, 393223, 10, 393224, 19, 393225, 18, 393226, 17, 393227, 9, 393228, 1, 393229, 1, 393230, 10, 393231, 19, 393232, 18, 393233, 17, 393234, 9, 393235, 1, 393236, 10, 393238, 19, 393239, 18, 393240, 18, 393241, 18, 393242, 18, 393243, 17, 393245, 19, 393246, 17, 393272, 9, 458759, 25, 458760, 1, 458761, 1, 458762, 1, 458763, 24, 458766, 25, 458767, 1, 458768, 1, 458769, 1, 458770, 24, 458772, 25, 458773, 1, 458774, 1, 458775, 1, 458776, 1, 458777, 1, 458778, 1, 458779, 1, 458780, 1, 458781, 1, 458782, 1, 458783, 10, 458788, 9, 458789, 1, 458790, 1, 458791, 1, 458792, 1, 458793, 1, 458794, 1, 458795, 1, 458796, 1, 458797, 1, 458798, 1, 458799, 1, 458800, 10, 458806, 9, 458807, 1, 524319, 11, 524320, 1, 524321, 1, 524322, 1, 524323, 1, 524337, 10, 524341, 9, 589874, 1, 589875, 1, 589876, 1 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+transform/pos = Vector2( -8, 32 )
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D"]
+
+transform/scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+
+[node name="Camera2D" type="Camera2D" parent="KinematicBody2D"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+drag_margin/h_enabled = true
+drag_margin/v_enabled = true
+smoothing/enable = false
+smoothing/speed = 5.0
+drag_margin/left = 0.2
+drag_margin/top = 0.2
+drag_margin/right = 0.2
+drag_margin/bottom = 0.2
+
+
