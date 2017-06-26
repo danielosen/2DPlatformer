@@ -1,0 +1,6 @@
+[gd_resource type="CanvasItemShader" format=1]
+
+[resource]
+
+_code = { "fragment":"uniform bool timer;\n//COLOR.rgb = tex(TEXTURE,UV).rgb*vec3(0.1,0.1,1)*abs(2+sin(TIME*2*3.14));", "fragment_ofs":0, "light":"", "light_ofs":0, "vertex":"", "vertex_ofs":0 }
+

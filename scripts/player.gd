@@ -9,10 +9,10 @@ var timerAttacking = 0
 var timerInvulnerability = 2
 var futureDeltaY = 0
 var experience = 0
-var agility = 200
+var agility = 2
 var strength = 2
 var intelligence = 2
-var maxJumpTime = 2*(1+agility/100)
+var maxJumpTime = 1.6*(1+agility/100)
 var maxSpeed = 2*(1+agility/100)
 var meleeDamage = 10 + strength
 var hp = 60 + 2*strength
@@ -83,7 +83,7 @@ func updateTimers(dt):
 	
 	if not stateGrounded and not stateJumping:
 		fallVec.y = timerGravity*timerGravity
-		timerGravity += 2*dt
+		timerGravity += 3*dt
 	else:
 		timerGravity = 0
 	
@@ -164,7 +164,6 @@ func alignMovement(inputVec,colResult):
 					futureDeltaY = -futurePos.x+16*ceil(futurePos.x/16)
 					print(futureDeltaY)
 			moveVec = Vector2(deltaX,deltaY).normalized()*sign(moveVec.x)
-
 	return moveVec
 
 func _fixed_process(dt):
@@ -215,8 +214,10 @@ func debug():
 	#get_parent().get_node("Canvas Layer 2D/Panel/Label").set_text("HP: "+str(hp))
 	#get_parent().get_node("Canvas Layer 2D/Panel/Label").set_text("Current FPS: " + str(OS.get_frames_per_second()))
 	#get_parent().get_node("Canvas Layer 2D/Panel/Label").set_text("EXP: " + str(experience))
-	get_parent().get_node("Canvas Layer 2D/Panel/Label").set_text("hp: " + str(hp) + (
-	 " str:" + str(strength) + " agi:" + str(agility) + " int:" + str(intelligence)))
+	#get_parent().get_node("Canvas Layer 2D/Panel/Label").set_text("hp: " + str(hp) + (
+	# " str:" + str(strength) + " agi:" + str(agility) + " int:" + str(intelligence)))
+	#get_parent().get_node("Canvas Layer 2D/Panel/Label").set_text(str(stateGrounded))
+	pass
 	
 func _on_Melee_HitBox_body_enter( body ):
 	if body.get_parent().is_in_group("Destructible"):

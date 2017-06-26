@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://scenes/tilset_grass.tres" type="TileSet" id=1]
+[ext_resource path="res://scripts/tilemap.gd" type="Script" id=2]
+[ext_resource path="res://scripts/player_test.gd" type="Script" id=3]
+[ext_resource path="res://sprites/jamo63.png" type="Texture" id=4]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 8, -8, 8, 8, -8, 8, -8, -8 )
+
+[node name="Game" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+
+z/z = -10
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -720853, 9, -720852, 1, -720851, 10, -655318, 9, -655314, 1, -655313, 10, -589783, 9, -589776, 1, -589775, 1, -524262, 9, -524261, 1, -524260, 10, -524248, 9, -458727, 9, -458723, 1, -458722, 10, -458713, 9, -393192, 9, -393185, 1, -393184, 1, -393183, 1, -393182, 1, -393181, 1, -393180, 1, -393179, 1, -393178, 1, -327657, 9, -262122, 9, -196593, 9, -196592, 1, -196591, 1, -196590, 1, -196589, 1, -196588, 1, -196587, 1, -131058, 9, -15, 1, -65526, 1, -65523, 9, 65511, 1, 65512, 1, 65513, 1, 65514, 1, 65515, 1, 65516, 1, 65521, 1, 10, 1, 12, 9, 131056, 1, 131057, 1, 131058, 1, 131059, 1, 131060, 1, 131061, 1, 131062, 1, 131063, 1, 131064, 1, 131065, 1, 131066, 1, 131067, 1, 131068, 1, 131069, 1, 131070, 1, 131071, 1, 65536, 1, 65537, 1, 65538, 1, 65539, 1, 65540, 1, 65541, 1, 65542, 1, 65543, 1, 65544, 1, 65545, 1, 65546, 1, 65547, 1 )
+script/script = ExtResource( 2 )
+
+[node name="Player" type="KinematicBody2D" parent="."]
+
+transform/pos = Vector2( 16, -16 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = true
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="Player"]
+
+z/z = -1
+texture = ExtResource( 4 )
+centered = false
+region = true
+region_rect = Rect2( 48, 48, 16, 32 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+drag_margin/h_enabled = true
+drag_margin/v_enabled = true
+smoothing/enable = false
+smoothing/speed = 5.0
+drag_margin/left = 0.2
+drag_margin/top = 0.2
+drag_margin/right = 0.2
+drag_margin/bottom = 0.2
+
+
