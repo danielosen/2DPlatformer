@@ -1,22 +1,233 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=15 format=1]
 
-[ext_resource path="res://scenes/tilset_grass.tres" type="TileSet" id=1]
-[ext_resource path="res://scripts/tilemap.gd" type="Script" id=2]
-[ext_resource path="res://scripts/player_test.gd" type="Script" id=3]
-[ext_resource path="res://sprites/jamo63.png" type="Texture" id=4]
+[ext_resource path="res://scripts/player_test.gd" type="Script" id=1]
+[ext_resource path="res://pyxelFiles/animation_test_daniel.png" type="Texture" id=2]
+[ext_resource path="res://pyxelFiles/Untitled_Animation 1_0.png" type="Texture" id=3]
+[ext_resource path="res://pyxelFiles/Untitled_Animation 1_1.png" type="Texture" id=4]
+[ext_resource path="res://pyxelFiles/Untitled_Animation 1_2.png" type="Texture" id=5]
+[ext_resource path="res://scripts/parallax_sprite.gd" type="Script" id=6]
+[ext_resource path="res://sprites/background2/cave background.png" type="Texture" id=7]
+[ext_resource path="res://tilesets/tileset_grassland.tres" type="TileSet" id=8]
+[ext_resource path="res://tilesets/tileset_collision.tres" type="TileSet" id=9]
+[ext_resource path="res://scripts/tilemap.gd" type="Script" id=10]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
+[sub_resource type="ConvexPolygonShape2D" id=5]
 
 custom_solver_bias = 0.0
-points = Vector2Array( 8, -8, 8, 8, -8, 8, -8, -8 )
+points = Vector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
-[node name="Game" type="Node2D"]
+[sub_resource type="Animation" id=2]
 
-[node name="TileMap" type="TileMap" parent="."]
+resource/name = "idle"
+length = 1.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Rect2( 0, 32, 32, 32 ) ] }
 
-z/z = -10
+[sub_resource type="Animation" id=3]
+
+length = 0.6
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ Rect2( 0, 0, 32, 32 ), Rect2( 32, 0, 32, 32 ), Rect2( 64, 0, 32, 32 ), Rect2( 96, 0, 32, 32 ), Rect2( 128, 0, 32, 32 ), Rect2( 160, 0, 32, 32 ) ] }
+
+[sub_resource type="SpriteFrames" id=6]
+
+animations = [ { "frames":[ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ], "loop":true, "name":"default", "speed":5.0 } ]
+
+[node name="Game" type="Node"]
+
+[node name="Player" type="KinematicBody2D" parent="."]
+
+transform/pos = Vector2( 32, -16 )
+input/pickable = false
+shapes/0/shape = SubResource( 5 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Player"]
+
+z/z = -1
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( -8, 0 )
+region = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+offset = Vector2( 0, -32 )
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 0.5, 0.5 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+drag_margin/h_enabled = false
+drag_margin/v_enabled = false
+smoothing/enable = false
+smoothing/speed = 5.0
+drag_margin/left = 0.2
+drag_margin/top = 0.2
+drag_margin/right = 0.2
+drag_margin/bottom = 0.2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/idle = SubResource( 2 )
+anims/run = SubResource( 3 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "run"
+
+[node name="env" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="env"]
+
+transform/pos = Vector2( -24, 8 )
+frames = SubResource( 6 )
+animation = "default"
+frame = 2
+playing = true
+
+[node name="AnimatedSprite11" type="AnimatedSprite" parent="env"]
+
+transform/pos = Vector2( 616, -120 )
+frames = SubResource( 6 )
+animation = "default"
+frame = 2
+playing = true
+
+[node name="AnimatedSprite6" type="AnimatedSprite" parent="env"]
+
+transform/pos = Vector2( -8, 8 )
+frames = SubResource( 6 )
+animation = "default"
+frame = 2
+playing = true
+
+[node name="AnimatedSprite5" type="AnimatedSprite" parent="env"]
+
+transform/pos = Vector2( -120, -56 )
+frames = SubResource( 6 )
+animation = "default"
+frame = 1
+playing = true
+
+[node name="AnimatedSprite1" type="AnimatedSprite" parent="env"]
+
+transform/pos = Vector2( 24, 8 )
+frames = SubResource( 6 )
+animation = "default"
+frame = 2
+playing = true
+
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="env"]
+
+transform/pos = Vector2( 168, -72 )
+frames = SubResource( 6 )
+animation = "default"
+frame = 2
+playing = true
+
+[node name="AnimatedSprite3" type="AnimatedSprite" parent="env"]
+
+transform/pos = Vector2( 296, -8 )
+frames = SubResource( 6 )
+animation = "default"
+frame = 2
+playing = true
+
+[node name="AnimatedSprite4" type="AnimatedSprite" parent="env"]
+
+transform/pos = Vector2( 344, -8 )
+frames = SubResource( 6 )
+animation = "default"
+frame = 1
+playing = true
+
+[node name="AnimatedSprite7" type="AnimatedSprite" parent="env"]
+
+transform/pos = Vector2( 520, -88 )
+frames = SubResource( 6 )
+animation = "default"
+playing = true
+
+[node name="AnimatedSprite8" type="AnimatedSprite" parent="env"]
+
+transform/pos = Vector2( 744, -56 )
+frames = SubResource( 6 )
+animation = "default"
+playing = true
+
+[node name="AnimatedSprite9" type="AnimatedSprite" parent="env"]
+
+transform/pos = Vector2( 664, -104 )
+frames = SubResource( 6 )
+animation = "default"
+frame = 2
+playing = true
+
+[node name="AnimatedSprite10" type="AnimatedSprite" parent="env"]
+
+transform/pos = Vector2( 856, -8 )
+frames = SubResource( 6 )
+animation = "default"
+frame = 2
+playing = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="env"]
+
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+scroll/offset = Vector2( 0, 0 )
+scroll/base_offset = Vector2( 0, 0 )
+scroll/base_scale = Vector2( 1, 1 )
+scroll/limit_begin = Vector2( 0, 0 )
+scroll/limit_end = Vector2( 0, 0 )
+scroll/ignore_camera_zoom = true
+script/script = ExtResource( 6 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="env/ParallaxBackground"]
+
+motion/scale = Vector2( 0.1, 0 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 512, 0 )
+
+[node name="Sprite" type="Sprite" parent="env/ParallaxBackground/ParallaxLayer"]
+
+texture = ExtResource( 7 )
+centered = false
+region_rect = Rect2( 0, 0, 512, 300 )
+
+[node name="map" type="Node2D" parent="."]
+
+[node name="visible" type="TileMap" parent="map"]
+
 mode = 0
-tile_set = ExtResource( 1 )
+tile_set = ExtResource( 8 )
 cell/size = Vector2( 16, 16 )
 cell/quadrant_size = 16
 cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -29,46 +240,25 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( -720853, 9, -720852, 1, -720851, 10, -655318, 9, -655314, 1, -655313, 10, -589783, 9, -589776, 1, -589775, 1, -524262, 9, -524261, 1, -524260, 10, -524248, 9, -458727, 9, -458723, 1, -458722, 10, -458713, 9, -393192, 9, -393185, 1, -393184, 1, -393183, 1, -393182, 1, -393181, 1, -393180, 1, -393179, 1, -393178, 1, -327657, 9, -262122, 9, -196593, 9, -196592, 1, -196591, 1, -196590, 1, -196589, 1, -196588, 1, -196587, 1, -131058, 9, -15, 1, -65526, 1, -65523, 9, 65511, 1, 65512, 1, 65513, 1, 65514, 1, 65515, 1, 65516, 1, 65521, 1, 10, 1, 12, 9, 131056, 1, 131057, 1, 131058, 1, 131059, 1, 131060, 1, 131061, 1, 131062, 1, 131063, 1, 131064, 1, 131065, 1, 131066, 1, 131067, 1, 131068, 1, 131069, 1, 131070, 1, 131071, 1, 65536, 1, 65537, 1, 65538, 1, 65539, 1, 65540, 1, 65541, 1, 65542, 1, 65543, 1, 65544, 1, 65545, 1, 65546, 1, 65547, 1 )
-script/script = ExtResource( 2 )
+tile_data = IntArray( -524249, 10, -458716, 3, -458715, 4, -458714, 2, -458713, 2, -458712, 1, -458711, 10, -458710, 10, -393183, 3, -393182, 4, -393181, 2, -393180, 9, -393179, 7, -393178, 7, -393177, 7, -393176, 8, -393175, 2, -393174, 2, -393173, 1, -327671, 10, -327669, 10, -327668, 10, -327650, 3, -327649, 4, -327648, 2, -327647, 9, -327646, 7, -327645, 7, -327644, 7, -327643, 7, -327642, 7, -327641, 7, -327640, 7, -327639, 7, -327638, 7, -327637, 8, -327636, 1, -196616, 10, -262137, 3, -262136, 4, -262135, 2, -262134, 2, -262133, 2, -262132, 2, -262131, 1, -262116, 3, -262115, 4, -262114, 9, -262113, 7, -262112, 7, -262111, 7, -262110, 7, -262109, 7, -262108, 7, -262107, 7, -262106, 7, -262105, 7, -262104, 7, -262103, 7, -262102, 7, -262101, 7, -262100, 8, -262099, 1, -262097, 10, -131080, 2, -131079, 5, -131078, 6, -196602, 0, -196601, 9, -196600, 7, -196599, 7, -196598, 7, -196597, 7, -196596, 7, -196595, 8, -196594, 1, -196582, 3, -196581, 4, -196580, 9, -196579, 7, -196578, 7, -196577, 7, -196576, 7, -196575, 7, -196574, 7, -196573, 7, -196572, 7, -196571, 7, -196570, 7, -196569, 7, -196568, 7, -196567, 7, -196566, 7, -196565, 7, -196564, 7, -196563, 8, -196562, 2, -196561, 2, -196560, 1, -65544, 7, -65543, 7, -65542, 8, -65541, 1, -131067, 0, -131066, 9, -131065, 7, -131064, 7, -131063, 7, -131062, 7, -131061, 7, -131060, 7, -131059, 7, -131058, 8, -131057, 1, -131048, 3, -131047, 4, -131046, 9, -131045, 7, -131044, 7, -131043, 7, -131042, 7, -131041, 7, -131040, 7, -131039, 7, -131038, 7, -131037, 7, -131036, 7, -131035, 7, -131034, 7, -131033, 7, -131032, 7, -131031, 7, -131030, 7, -131029, 7, -131028, 7, -131027, 7, -131026, 7, -131025, 7, -131024, 8, -131023, 1, -8, 7, -7, 7, -6, 7, -5, 8, -4, 1, -65532, 0, -65531, 9, -65530, 7, -65529, 7, -65528, 7, -65527, 7, -65526, 7, -65525, 7, -65524, 7, -65523, 7, -65522, 7, -65521, 8, -65520, 5, -65519, 6, -65518, 10, -65517, 10, -65516, 10, -65514, 3, -65513, 4, -65512, 9, -65511, 7, -65510, 7, -65509, 7, -65508, 7, -65507, 7, -65506, 7, -65505, 7, -65504, 7, -65503, 7, -65502, 7, -65501, 7, -65500, 7, -65499, 7, -65498, 7, -65497, 7, -65496, 7, -65495, 7, -65494, 7, -65493, 7, -65492, 7, -65491, 7, -65490, 7, -65489, 7, -65488, 7, -65487, 8, -65486, 5, -65485, 6, -65484, 10, 65528, 7, 65529, 7, 65530, 7, 65531, 7, 65532, 8, 65533, 1, 65534, 10, 0, 10, 1, 10, 2, 10, 3, 0, 4, 9, 5, 7, 6, 7, 7, 7, 8, 7, 9, 7, 10, 7, 11, 7, 12, 7, 13, 7, 14, 7, 15, 7, 16, 7, 17, 8, 18, 2, 19, 2, 20, 2, 21, 2, 22, 9, 23, 7, 24, 7, 25, 7, 26, 7, 27, 7, 28, 7, 29, 7, 30, 7, 31, 7, 32, 7, 33, 7, 34, 7, 35, 7, 36, 7, 37, 7, 38, 7, 39, 7, 40, 7, 41, 7, 42, 7, 43, 7, 44, 7, 45, 7, 46, 7, 47, 7, 48, 7, 49, 7, 50, 7, 51, 8, 52, 2, 53, 2, 131064, 7, 131065, 7, 131066, 7, 131067, 7, 131068, 7, 131069, 8, 131070, 2, 131071, 2, 65536, 2, 65537, 2, 65538, 2, 65539, 9, 65540, 7, 65541, 7, 65542, 7, 65543, 7, 65544, 7, 65545, 7, 65546, 7, 65547, 7, 65548, 7, 65549, 7, 65550, 7, 65551, 7, 65552, 7, 65553, 7, 65554, 7, 65555, 7, 65556, 7, 65557, 7, 65558, 7, 65559, 7, 65560, 7, 65561, 7, 65582, 7, 65583, 7, 65584, 7, 65585, 7, 65586, 7, 65587, 7, 65588, 7, 65589, 7 )
 
-[node name="Player" type="KinematicBody2D" parent="."]
+[node name="TileMap" type="TileMap" parent="map"]
 
-transform/pos = Vector2( 16, -16 )
-input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = true
+mode = 0
+tile_set = ExtResource( 9 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
-collision/margin = 0.08
-script/script = ExtResource( 3 )
-
-[node name="Sprite" type="Sprite" parent="Player"]
-
-z/z = -1
-texture = ExtResource( 4 )
-centered = false
-region = true
-region_rect = Rect2( 48, 48, 16, 32 )
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-
-anchor_mode = 1
-rotating = false
-current = true
-zoom = Vector2( 1, 1 )
-limit/left = -10000000
-limit/top = -10000000
-limit/right = 10000000
-limit/bottom = 10000000
-drag_margin/h_enabled = true
-drag_margin/v_enabled = true
-smoothing/enable = false
-smoothing/speed = 5.0
-drag_margin/left = 0.2
-drag_margin/top = 0.2
-drag_margin/right = 0.2
-drag_margin/bottom = 0.2
+occluder/light_mask = 1
+tile_data = IntArray( -458716, 3, -458715, 3, -458714, 0, -458713, 0, -458712, 2, -393183, 3, -393182, 3, -393181, 0, -393180, 3, -393179, 3, -393176, 2, -393175, 0, -393174, 0, -393173, 2, -327650, 3, -327649, 3, -327648, 0, -327647, 3, -327646, 3, -327637, 2, -327636, 2, -262137, 3, -262136, 3, -262135, 0, -262134, 0, -262133, 0, -262132, 0, -262131, 2, -262116, 3, -262115, 3, -262114, 3, -262100, 2, -262099, 2, -131080, 0, -131079, 0, -131078, 4, -196602, 1, -196601, 3, -196600, 3, -196595, 2, -196594, 2, -196582, 3, -196581, 3, -196580, 3, -196579, 3, -196563, 2, -196562, 0, -196561, 0, -196560, 2, -65543, 4, -65542, 4, -65541, 2, -131067, 1, -131066, 1, -131058, 2, -131057, 2, -131048, 3, -131047, 3, -131046, 3, -131045, 3, -131025, 2, -131024, 2, -131023, 2, -5, 2, -4, 2, -65532, 1, -65531, 1, -65521, 2, -65520, 4, -65514, 3, -65513, 3, -65512, 3, -65511, 3, -65487, 2, -65486, 4, -65485, 4, 65532, 2, 65533, 2, 3, 1, 4, 1, 16, 4, 17, 0, 18, 0, 19, 0, 20, 0, 21, 0, 22, 3, 23, 3, 50, 4, 51, 0, 52, 0, 53, 0, 131069, 2, 131070, 0, 131071, 0, 65536, 0, 65537, 0, 65538, 0, 65539, 1 )
+script/script = ExtResource( 10 )
 
 

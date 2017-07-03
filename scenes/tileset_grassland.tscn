@@ -1,0 +1,94 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://pyxelFiles/grassland_tiles.png" type="Texture" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="Sprite1" type="Sprite" parent="."]
+
+transform/pos = Vector2( 16, 0 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 16, 0, 16, 16 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+
+transform/pos = Vector2( 32, 0 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 32, 0, 16, 16 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+
+transform/pos = Vector2( 48, 0 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 0, 32, 16, 16 )
+
+[node name="Sprite4" type="Sprite" parent="."]
+
+transform/pos = Vector2( 64, 0 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 16, 32, 16, 16 )
+
+[node name="Sprite5" type="Sprite" parent="."]
+
+transform/pos = Vector2( 80, 0 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 32, 32, 16, 16 )
+
+[node name="Sprite6" type="Sprite" parent="."]
+
+transform/pos = Vector2( 96, 0 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 48, 32, 16, 16 )
+
+[node name="Sprite7" type="Sprite" parent="."]
+
+transform/pos = Vector2( 32, 16 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 32, 16, 16, 16 )
+
+[node name="Sprite8" type="Sprite" parent="."]
+
+transform/pos = Vector2( 16, 16 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 16, 16, 16, 16 )
+
+[node name="Sprite9" type="Sprite" parent="."]
+
+transform/pos = Vector2( 0, 16 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 0, 16, 16, 16 )
+
+[node name="Sprite10" type="Sprite" parent="."]
+
+transform/pos = Vector2( 64, 32 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 64, 32, 16, 16 )
+
+

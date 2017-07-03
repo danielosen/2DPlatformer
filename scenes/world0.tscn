@@ -14,7 +14,7 @@
 [ext_resource path="res://sprites/snake_d.png" type="Texture" id=12]
 [ext_resource path="res://scripts/player.gd" type="Script" id=13]
 [ext_resource path="res://scenes/shader.tres" type="Shader" id=14]
-[ext_resource path="res://sprites/elisa-spritesheet1.png" type="Texture" id=15]
+[ext_resource path="res://pyxelFiles/animation again2.png" type="Texture" id=15]
 [ext_resource path="res://sound/footstep1_generic.wav" type="Sample" id=16]
 [ext_resource path="res://sound/footstep1_mud.wav" type="Sample" id=17]
 [ext_resource path="res://sound/footstep2_generic.wav" type="Sample" id=18]
@@ -202,7 +202,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Rect2( 229, 71, 54, 54 ) ] }
+tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Rect2( 96, 0, 32, 32 ) ] }
 
 [sub_resource type="Animation" id=18]
 
@@ -224,7 +224,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.2, 0.4 ), "transitions":FloatArray( 1, 1, 1 ), "update":1, "values":[ Rect2( 8, 71, 54, 54 ), Rect2( 74, 71, 54, 54 ), Rect2( 157, 71, 54, 54 ) ] }
+tracks/0/keys = { "times":FloatArray( 0, 0.2, 0.4 ), "transitions":FloatArray( 1, 1, 1 ), "update":1, "values":[ Rect2( 64, 0, 32, 32 ), Rect2( 96, 0, 32, 32 ), Rect2( 128, 0, 32, 32 ) ] }
 tracks/1/type = "value"
 tracks/1/path = NodePath("SamplePlayer2D:play/play")
 tracks/1/interp = 1
@@ -233,19 +233,19 @@ tracks/1/keys = { "times":FloatArray( 0.1 ), "transitions":FloatArray( 1 ), "upd
 
 [sub_resource type="Animation" id=20]
 
-length = 0.7
+length = 0.6
 loop = false
 step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ Rect2( 7, 144, 54, 54 ), Rect2( 64, 144, 54, 54 ), Rect2( 121, 144, 54, 54 ), Rect2( 178, 144, 54, 54 ), Rect2( 235, 144, 54, 54 ), Rect2( 292, 144, 54, 54 ), Rect2( 349, 144, 54, 54 ), Rect2( 406, 144, 54, 54 ) ] }
+tracks/0/keys = { "times":FloatArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ Rect2( 0, 0, 32, 32 ), Rect2( 32, 0, 32, 32 ), Rect2( 64, 0, 32, 32 ), Rect2( 96, 0, 32, 32 ), Rect2( 128, 0, 32, 32 ), Rect2( 160, 0, 32, 32 ) ] }
 tracks/1/type = "value"
 tracks/1/path = NodePath("SamplePlayer2D:play/play")
 tracks/1/interp = 1
 tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0.2, 0.6 ), "transitions":FloatArray( 1, 1 ), "update":2, "values":[ "footstep1_generic", "footstep1_generic" ] }
+tracks/1/keys = { "times":FloatArray( 0.1, 0.4 ), "transitions":FloatArray( 1, 1 ), "update":2, "values":[ "footstep1_generic", "footstep1_generic" ] }
 
 [sub_resource type="SampleLibrary" id=21]
 
@@ -1231,7 +1231,6 @@ trigger = false
 
 [node name="Player" type="KinematicBody2D" parent="." groups=[ "Player" ]]
 
-editor/display_folded = true
 transform/pos = Vector2( 2, -8 )
 input/pickable = false
 shapes/0/shape = SubResource( 14 )
@@ -1256,9 +1255,10 @@ stream/buffering_ms = 500
 [node name="Sprite" type="Sprite" parent="Player"]
 
 material/material = SubResource( 15 )
+transform/pos = Vector2( -2, 3 )
 texture = ExtResource( 15 )
 region = true
-region_rect = Rect2( 198, 277, 63, 49 )
+region_rect = Rect2( 96, 0, 32, 32 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
