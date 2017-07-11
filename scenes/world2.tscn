@@ -1,12 +1,12 @@
 [gd_scene load_steps=15 format=1]
 
 [ext_resource path="res://scripts/player_test.gd" type="Script" id=1]
-[ext_resource path="res://pyxelFiles/animation_test_daniel.png" type="Texture" id=2]
+[ext_resource path="res://pyxelFiles/ranger 8 bit/ranger 8 bit.png" type="Texture" id=2]
 [ext_resource path="res://pyxelFiles/Untitled_Animation 1_0.png" type="Texture" id=3]
 [ext_resource path="res://pyxelFiles/Untitled_Animation 1_1.png" type="Texture" id=4]
 [ext_resource path="res://pyxelFiles/Untitled_Animation 1_2.png" type="Texture" id=5]
 [ext_resource path="res://scripts/parallax_sprite.gd" type="Script" id=6]
-[ext_resource path="res://sprites/background2/cave background.png" type="Texture" id=7]
+[ext_resource path="res://sprites/background2/background2.png" type="Texture" id=7]
 [ext_resource path="res://tilesets/tileset_grassland.tres" type="TileSet" id=8]
 [ext_resource path="res://tilesets/tileset_collision.tres" type="TileSet" id=9]
 [ext_resource path="res://scripts/tilemap.gd" type="Script" id=10]
@@ -37,7 +37,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:region_rect")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ Rect2( 0, 0, 32, 32 ), Rect2( 32, 0, 32, 32 ), Rect2( 64, 0, 32, 32 ), Rect2( 96, 0, 32, 32 ), Rect2( 128, 0, 32, 32 ), Rect2( 160, 0, 32, 32 ) ] }
+tracks/0/keys = { "times":FloatArray( 0, 0.1, 0.2, 0.3 ), "transitions":FloatArray( 1, 1, 1, 1 ), "update":1, "values":[ Rect2( 0, 0, 48, 48 ), Rect2( 48, 0, 48, 48 ), Rect2( 96, 0, 48, 48 ), Rect2( 144, 0, 48, 48 ) ] }
 
 [sub_resource type="SpriteFrames" id=6]
 
@@ -61,10 +61,9 @@ script/script = ExtResource( 1 )
 
 z/z = -1
 texture = ExtResource( 2 )
-centered = false
-offset = Vector2( -8, 0 )
+offset = Vector2( 0, 7 )
 region = true
-region_rect = Rect2( 0, 0, 32, 32 )
+region_rect = Rect2( 144, 0, 48, 48 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
@@ -100,8 +99,6 @@ autoplay = "run"
 
 [node name="env" type="Node2D" parent="."]
 
-editor/display_folded = true
-
 [node name="AnimatedSprite" type="AnimatedSprite" parent="env"]
 
 transform/pos = Vector2( -24, 8 )
@@ -115,7 +112,7 @@ playing = true
 transform/pos = Vector2( 616, -120 )
 frames = SubResource( 6 )
 animation = "default"
-frame = 2
+frame = 1
 playing = true
 
 [node name="AnimatedSprite6" type="AnimatedSprite" parent="env"]
@@ -123,7 +120,7 @@ playing = true
 transform/pos = Vector2( -8, 8 )
 frames = SubResource( 6 )
 animation = "default"
-frame = 2
+frame = 1
 playing = true
 
 [node name="AnimatedSprite5" type="AnimatedSprite" parent="env"]
@@ -139,7 +136,7 @@ playing = true
 transform/pos = Vector2( 24, 8 )
 frames = SubResource( 6 )
 animation = "default"
-frame = 2
+frame = 1
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="env"]
@@ -147,7 +144,7 @@ playing = true
 transform/pos = Vector2( 168, -72 )
 frames = SubResource( 6 )
 animation = "default"
-frame = 2
+frame = 1
 playing = true
 
 [node name="AnimatedSprite3" type="AnimatedSprite" parent="env"]
@@ -155,7 +152,7 @@ playing = true
 transform/pos = Vector2( 296, -8 )
 frames = SubResource( 6 )
 animation = "default"
-frame = 2
+frame = 1
 playing = true
 
 [node name="AnimatedSprite4" type="AnimatedSprite" parent="env"]
@@ -163,7 +160,6 @@ playing = true
 transform/pos = Vector2( 344, -8 )
 frames = SubResource( 6 )
 animation = "default"
-frame = 1
 playing = true
 
 [node name="AnimatedSprite7" type="AnimatedSprite" parent="env"]
@@ -193,7 +189,7 @@ playing = true
 transform/pos = Vector2( 856, -8 )
 frames = SubResource( 6 )
 animation = "default"
-frame = 2
+frame = 1
 playing = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="env"]
@@ -244,6 +240,7 @@ tile_data = IntArray( -524249, 10, -458716, 3, -458715, 4, -458714, 2, -458713, 
 
 [node name="TileMap" type="TileMap" parent="map"]
 
+visibility/visible = false
 mode = 0
 tile_set = ExtResource( 9 )
 cell/size = Vector2( 16, 16 )
